@@ -252,5 +252,5 @@ public:
 
 int main(){
     Institute i(2);
-    cout << i.count();
+    cout << i.count() << endl;
 }
