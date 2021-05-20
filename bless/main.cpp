@@ -1,256 +1,205 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include "cathedra.hpp"
+#include "institute.hpp"
+#include "printer.hpp"
+#include "iter.hpp"
 
 using namespace std;
 
-class Organisation{
-protected:
-    string name;
-    string phone;
-    string address;
-    int income;
-
-public:
-    Organisation(){
-        cout << "Enter name of organisation" << endl;
-        cin >> name;
-        
-        cout << "Enter its phone number" << endl;
-        cin >> phone;
-        
-        cout << "Enter address" << endl;
-        cin >> address;
-        
-        cout << "Enter annualy income" << endl;
-        cin >> income;
-    }
-    
-    Organisation(string n_name, string n_phone, string n_address, int n_income):
-    name(n_name), phone(n_phone), address(n_address), income(n_income){}
-    
-    Organisation(const Organisation &a):
-    name(a.name), phone(a.phone), address(a.address), income(a.income){}
-    
-    string get_name() const {return name;}
-    void set_name(string n_name){name = n_name;}
-    
-    string get_phone() const {return phone;}
-    void set_phone(string n_phone) {phone = n_phone;}
-    
-    string get_address() const {return address;}
-    void set_address(string n_address){address = n_address;}
-    
-    int get_income() const {return income;}
-    void set_income(int n_income){income=n_income;}
-    
-    Organisation operator= (const Organisation& a){
-        name = a.name;
-        phone = a.phone;
-        address = a.address;
-        income = a.income;
-        return *this;
-    };
-    
-    Organisation operator()(string n_name, string n_phone, string n_address, int n_income) const {
-        Organisation tmp(n_name, n_phone, n_address, income+n_income);
-        return tmp;
-    }
-    
-    friend ostream& operator<<(ostream& out, const Organisation& org);
-    
-    friend istream& operator>>(istream& in, Organisation& org);
-    
-    virtual void readType() {
-        cout << name << endl;
-    };
-    
-//    ~Organisation(){
-//        cout << name << " organisation deleted successfully" << endl;
-//    }
-};
-
-ostream& operator<<(ostream& out, const Organisation& org){
-    out << "You can contact organisation " << org.name << " with annual income " << org.income <<
-    " via calling " << org.phone << " or to get to "
-    << org.address << endl;
-    return out;
-};
-
-istream& operator>>(istream& in, Organisation& org){
-    cout << "Enter name of organisation" << endl;
-    in >> org.name;
-    
-    cout << "Enter its phone number" << endl;
-    in >> org.phone;
-    
-    cout << "Enter address" << endl;
-    in >> org.address;
-    return in;
-};
-
-class Cathedra: public Organisation{
-private:
-    string specialization;
-    struct certain_amount{
-        int bacaulors;
-        int specialists;
-        int magisters;
-    };
-    certain_amount people;
-public:
-    Cathedra(): Organisation(){
-        cout << "Enter specialization of cathedra\n";
-        cin >> specialization;
-        
-        cout << "Enter amount of bacaulors\n";
-        cin >> people.bacaulors;
-        
-        cout << "Enter amount of specialists\n";
-        cin >> people.specialists;
-        
-        cout << "Enter amount of magisters\n";
-        cin >> people.magisters;
-    };
-    
-    Cathedra(string n_name, string n_phone, string n_address, int n_income, string n_specialization,
-             int n_bacaulors, int n_specialists, int n_magisters):
-    Organisation(n_name, n_phone, n_address, n_income), specialization(n_specialization){
-        people.bacaulors = n_bacaulors;
-        people.specialists = n_specialists;
-        people.magisters = n_magisters;
-    };
-    
-    Cathedra(const Cathedra& cathedra){
-        name = cathedra.name;
-        phone = cathedra.phone;
-        address = cathedra.phone;
-        income = cathedra.income;
-        people.bacaulors = cathedra.people.bacaulors;
-        people.specialists = cathedra.people.specialists;
-        people.magisters = cathedra.people.magisters;
-    }
-    
-    string get_specialization() const {return specialization;}
-    void set_specialization(string n_specialization){specialization = n_specialization;}
-    
-    int get_bacaulors() const {return people.bacaulors;}
-    void set_bacaulors(int n_bacaulors){people.bacaulors = n_bacaulors;}
-    
-    int get_specialists() const {return people.specialists;}
-    void set_specialitst(int n_specialists){people.specialists = n_specialists;}
-    
-    int get_magisters() const {return people.magisters;}
-    void set_magisters(int n_magisters){people.magisters = n_magisters;}
-    
-    friend ostream& operator<<(ostream& out, const Cathedra& cathedra);
-    friend istream& operator>>(istream& in, Cathedra& cathedra);
-    
-    virtual void readType() override{
-        cout << specialization << endl;
-    }
-};
-
-
-ostream& operator<<(ostream& out, const Cathedra& cathedra){
-    out << "Info about cathedra " << cathedra.name << ": " << endl;
-    out << "Phone number " << cathedra.phone << endl;
-    out << "Address " << cathedra.address << endl;
-    out << "Spesizalization " << cathedra.specialization << endl;
-    out << "Amount of bacaulors " << cathedra.people.bacaulors << ", of specialists "
-    << cathedra.people.specialists << " and of magisters is " << cathedra.people.magisters << endl;
-    return out;
-};
-
-istream& operator>>(istream& in, Cathedra& cathedra){
-    cout << "Enter name of organisation" << endl;
-    in >> cathedra.name;
-    
-    cout << "Enter its phone number" << endl;
-    in >> cathedra.phone;
-    
-    cout << "Enter address" << endl;
-    in >> cathedra.address;
-    
-    cout << "Enter specialization" << endl;
-    in >> cathedra.specialization;
-    
-    cout << "Enter amount of bacaulors" << endl;
-    in >> cathedra.people.bacaulors;
-    
-    cout << "Enter amount of specialists" << endl;
-    in >> cathedra.people.specialists;
-    
-    cout << "Enter amount of magisters" << endl;
-    in >> cathedra.people.magisters;
-    
-    return in;
-};
-
-class iter{
-protected:
-    Cathedra* i;
-public:
-    explicit iter(Cathedra* i1 = 0) : i(i1){};
-    iter(const iter& x) : i(x.i){};
-    iter& operator=(const iter& x) { i = x.i; return *this;}
-    Cathedra& operator*() const { return *i; };
-    iter& operator++ () { ++i; return *this; };
-    iter& operator-- () { --i; return *this; };
-    iter& operator++ (int) { i++; return *this; };
-    iter& operator-- (int) { i--; return *this; };
-    iter operator-(int n) { return iter(i - n); }
-    iter operator+(int n) { return iter(i+n); }
-    
-    Cathedra get_i() const {return *i;}
-    
-    bool operator!=(const iter& x)const { return i != x.i; }
-    friend int operator-(const iter& x, const iter& y){ return x.i - y.i; }
-};
-
-class Institute{
-protected:
-    Cathedra* cathedras;
-    int size;
-public:
-    Institute(int n){
-        size = n;
-        cathedras = new Cathedra[size];
-        for(iter i = begin(); i != end(); ++i){
-            *i = cathedras[i - begin()];
-        };
-    };
-    
-    Institute(const Institute& a) {
-        cathedras = new Cathedra[size = a.size];
-        for (iter i = begin(); i != end(); ++i) *i = a.cathedras[i - begin()];
-    };
-    
-    ~Institute() { delete[]cathedras; }
-    
-    Institute& operator=(const Institute& a){
-        if (this != &a){
-            delete[]cathedras; cathedras = new Cathedra[size = a.size];
-            for (iter i = begin(); i != end(); ++i) *i = a.cathedras[i - begin()];}
-                return *this;
-    };
-    
-    int count(){
-        int amount = 0;
-        for(iter i = begin(); i != end(); i++){
-            amount += cathedras[i-begin()].get_bacaulors();
-            amount += cathedras[i-begin()].get_magisters();
-            amount += cathedras[i-begin()].get_specialists();
-        };
-        return amount;
-    };
-    
-    iter begin() { return iter(cathedras); }
-    iter end() { return iter(cathedras + size); }
-};
-
 
 int main(){
-    Institute i(2);
-    cout << i.count() << endl;
+    cout << "Welcome to my Program" << endl;
+    cout << "First create an institute\n" << endl;
+    Institute institute = Institute();
+    cout << "Here is a list of possible actions to perform with corresponding numbers (enter 0 if you want to get back)" << endl;
+    while(true){
+        cout << "1 - Institute read, update, delete actions\n" << "2 - Cathedra actions\n" << "3 - demonstrate polimorfism cluster (developer function only, but firstly create cathedra)" << endl;
+        int action = -1;
+        cin >> action;
+        if(action == 0)
+            return 0;
+        switch(action){
+            case 1:{
+                cout << "1 - Get info about institute\n" << "2 - Edit institute\n" << "3 - Delete institute\n";
+                int inst_action;
+                cin >> inst_action;
+                switch(inst_action){
+                    case 1:{
+                        cout << institute;
+                        cout << "Amount of students is " << institute.count() << endl;
+                        break;
+                    }
+                    case 2:{
+                        cout << "1 - edit name, 2 - edit address, 3 - edit income, 4 - edit phone number\n";
+                        cin >> action;
+                        cout << "Enter new value: ";
+                        switch(action){
+                            case 1:{
+                                string name;
+                                cin >> name;
+                                institute.set_name(name);
+                                break;
+                            }
+                            case 2:{
+                                string address;
+                                cin >> address;
+                                institute.set_address(address);
+                                break;
+                            }
+                            case 3:{
+                                int income;
+                                cin >> income;
+                                institute.set_income(income);
+                                break;
+                            }
+                            case 4:{
+                                string number;
+                                cin >> number;
+                                institute.set_phone(number);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 3:{
+                        return 0;
+                    };
+                    default:{
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2:{
+                cout << "1 - create cathedras, 2 - Find cathedra by name" << endl;
+                cin >> action;
+                switch(action){
+                    case 1:{
+                        cout << "How much cathedras would u like to create?\n";
+                        int n;
+                        cin >> n;
+                        institute.set_size(n);
+                        break;
+                    }
+                    case 2:{
+                        if(!institute.getSize()){
+                            cout << "There are no cathedras in institute! Please add and come back:)\n";
+                            break;
+                        }
+                        cout << "Enter cathedras name\n";
+                        string name;
+                        cin >> name;
+                        bool flag = false;
+                        iter a = institute.begin();
+                        Cathedra *temp = &institute.getCathedras()[a - institute.begin()];
+                        for(iter i = institute.begin(); i != institute.end(); ++i){
+                            if(institute.getCathedras()[i - institute.begin()].get_name() == name){
+                                temp = &institute.getCathedras()[i - institute.begin()];
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if(!flag){
+                            cout << "No corresponding cathedra" << endl;
+                            break;
+                        }
+                        cout << "1 - change name, 2 - change specialization, 3 - get info about it, 4 - delete\n";
+                        cin >> action;
+                        switch(action){
+                            case 1:{
+                                cout << "Enter new one: ";
+                                cin >> name;
+                                temp->set_name(name);
+                                break;
+                            }
+                            case 2:{
+                                cout << "Enter new one: ";
+                                cin >> name;
+                                temp->set_specialization(name);
+                                break;
+                            }
+                            case 3:{
+                                cout << *temp;
+                                break;
+                            }
+                            case 4:{
+                                delete temp;
+                                institute.setSize(institute.getSize() - 1);
+                                break;
+                            };
+                            default:{
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+            case 3:{
+                if(!institute.getSize()){
+                    cout << "Please add some cathedra firstly\n";
+                    break;
+                };
+                cout << "Would u like to call polimorf method of institute or of cathedra(1 - institute, 2 - cathedra)\n";
+                int chose;
+                cin >> chose;
+                switch(chose){
+                    case 1:{
+                        Institute* inst = &institute;
+                        Printer::print(inst);
+                        break;
+                    }
+                    case 2:{
+                        Cathedra* cath = &institute.getCathedras()[0];
+                        Printer::print(cath);
+                        break;
+                    }
+                    default:{
+                        break;
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
 }
+
+//    Organisation org = Organisation();
+//    Organisation orgParams = Organisation("HPI", "+380747474", "Sumskaya", 100);
+//    Organisation orgCopy = Organisation(orgParams);
+//
+//    cout << "Enter new cathedra" << endl;
+//    Cathedra cathedra = Cathedra();
+//    Cathedra* ptr = &cathedra;
+//    Organisation* new_org = ptr;
+//
+//    Printer::print(new_org);
+//
+//    Cathedra cathedraParams = Cathedra("KNT", "943759473", "Nure", 10000, "computer science", 100, 20, 40);
+//    Cathedra cathedraCopy = Cathedra(cathedraParams);
+//
+//    cout << "cathedraParams name is " << cathedraParams.get_name() << endl;
+//    cout << "setting new name to KiberBezpeka" << endl;
+//    cathedraParams.set_name("KiberBezpeka");
+//    cout << "now it's name is " << cathedraParams.get_name() << endl;
+//    cout << "Organisation income is " << org.get_income() << endl;
+//
+//    cout << "Lets renew cathedra " << cathedraParams.get_name() << endl;
+//    cin >> cathedraParams;
+//    cout << "cout of cathedra " << cathedraParams.get_name() << "ч is " << cathedraParams << endl;
+//    cout << "cout of org is " << org << endl;
+//
+//    int n;
+//    cout << "How many cathedras would you like to create for institute?" << endl;
+//    cin >> n;
+//
+//    Institute i("nure", "sndfk", "sklfkdmf", 500, n);
+//
+//    cout << "amount of cathedras in institute " << i.get_name() << " is " << i.getSize() << endl;
+//    cout << i.count() << endl;
+    

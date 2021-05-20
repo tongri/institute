@@ -6,3 +6,14 @@
 //
 
 #include "printer.hpp"
+#include "organisation.hpp"
+#include <iostream>
+
+using namespace std;
+
+void Printer::print(Organisation* org){
+    cout << "Вызов статического метода класса Printer" << endl;
+    org->print();
+    cout << endl;
+    
+}

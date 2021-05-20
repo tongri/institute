@@ -6,8 +6,15 @@
 //
 
 #ifndef printer_hpp
+#include "organisation.hpp"
 #define printer_hpp
 
 #include <stdio.h>
 
 #endif /* printer_hpp */
+
+
+class Printer{
+public:
+    static void print(Organisation* org);
+};

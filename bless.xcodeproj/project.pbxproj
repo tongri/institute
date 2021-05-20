@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B110C3EB26481DE600EE4A98 /* organisation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B110C3E926481DE600EE4A98 /* organisation.cpp */; };
+		B130946A264C7BC20041B36C /* cathedra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1309468264C7BC20041B36C /* cathedra.cpp */; };
+		B130946E264C7F4D0041B36C /* iter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B130946C264C7F4D0041B36C /* iter.cpp */; };
 		B1BBC4992647D25A0002A3C7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1BBC4982647D25A0002A3C7 /* main.cpp */; };
+		B1CD93A6264D22EA0096DF27 /* institute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1CD93A4264D22EA0096DF27 /* institute.cpp */; };
+		B1CD93AA264DCAB80096DF27 /* printer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1CD93A8264DCAB80096DF27 /* printer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,9 +30,16 @@
 /* Begin PBXFileReference section */
 		B110C3E926481DE600EE4A98 /* organisation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = organisation.cpp; sourceTree = "<group>"; };
 		B110C3ED26481EF400EE4A98 /* organisation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = organisation.hpp; sourceTree = "<group>"; };
+		B1309468264C7BC20041B36C /* cathedra.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cathedra.cpp; sourceTree = "<group>"; };
+		B1309469264C7BC20041B36C /* cathedra.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cathedra.hpp; sourceTree = "<group>"; };
+		B130946C264C7F4D0041B36C /* iter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = iter.cpp; sourceTree = "<group>"; };
+		B130946D264C7F4D0041B36C /* iter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = iter.hpp; sourceTree = "<group>"; };
 		B1BBC4952647D25A0002A3C7 /* bless */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bless; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BBC4982647D25A0002A3C7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B1BBC4A02648180F0002A3C7 /* iterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iterator.h; sourceTree = "<group>"; };
+		B1CD93A4264D22EA0096DF27 /* institute.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = institute.cpp; sourceTree = "<group>"; };
+		B1CD93A5264D22EA0096DF27 /* institute.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = institute.hpp; sourceTree = "<group>"; };
+		B1CD93A8264DCAB80096DF27 /* printer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = printer.cpp; sourceTree = "<group>"; };
+		B1CD93A9264DCAB80096DF27 /* printer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = printer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +74,15 @@
 			children = (
 				B110C3ED26481EF400EE4A98 /* organisation.hpp */,
 				B1BBC4982647D25A0002A3C7 /* main.cpp */,
-				B1BBC4A02648180F0002A3C7 /* iterator.h */,
 				B110C3E926481DE600EE4A98 /* organisation.cpp */,
+				B1309468264C7BC20041B36C /* cathedra.cpp */,
+				B1309469264C7BC20041B36C /* cathedra.hpp */,
+				B130946C264C7F4D0041B36C /* iter.cpp */,
+				B130946D264C7F4D0041B36C /* iter.hpp */,
+				B1CD93A4264D22EA0096DF27 /* institute.cpp */,
+				B1CD93A5264D22EA0096DF27 /* institute.hpp */,
+				B1CD93A8264DCAB80096DF27 /* printer.cpp */,
+				B1CD93A9264DCAB80096DF27 /* printer.hpp */,
 			);
 			path = bless;
 			sourceTree = "<group>";
@@ -126,7 +144,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1BBC4992647D25A0002A3C7 /* main.cpp in Sources */,
+				B130946E264C7F4D0041B36C /* iter.cpp in Sources */,
 				B110C3EB26481DE600EE4A98 /* organisation.cpp in Sources */,
+				B130946A264C7BC20041B36C /* cathedra.cpp in Sources */,
+				B1CD93AA264DCAB80096DF27 /* printer.cpp in Sources */,
+				B1CD93A6264D22EA0096DF27 /* institute.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
