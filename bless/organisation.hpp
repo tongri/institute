@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 
 using namespace std;
@@ -11,7 +10,7 @@ protected:
     int income;
 public:
     
-    Organisation(){}
+    Organisation();
     
     Organisation(string n_name, string n_phone, string n_address, int n_income);
     
@@ -29,7 +28,7 @@ public:
     int get_income();
     void set_income(int n_income);
     
-    Organisation operator= (const Organisation& a);
+    Organisation operator=(const Organisation& a);
     
     Organisation operator()(string n_name, string n_phone, string n_address, int n_income);
     
